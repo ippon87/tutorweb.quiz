@@ -120,7 +120,7 @@ function Quiz(ajax, rawLocalStorage, handleError) {
             a.quiz_time = Math.round((new Date()).getTime() / 1000);
             onSuccess(qn, ordering);
         }
-        //TODO: Hack!
+        //TODO: make this work without mockup variables
         function itemAllocation(questions, answerQueue) {
 			var grade = 5;
 			var numquiz = [10, 10, 10];
