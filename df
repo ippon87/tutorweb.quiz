@@ -1,0 +1,217 @@
+[33mcommit bf2c67af5d6bf05f37052e3ff40844282df6e6d7[m
+Author: ippon87 <sob15@hi.is>
+Date:   Mon Jul 29 14:23:08 2013 +0000
+
+    again with changes that did not make it
+
+[1mdiff --git a/tutorweb/quiz/browser/resources/grade.js b/tutorweb/quiz/browser/resources/grade.js[m
+[1mindex c65d79d..0b55ba6 100644[m
+[1m--- a/tutorweb/quiz/browser/resources/grade.js[m
+[1m+++ b/tutorweb/quiz/browser/resources/grade.js[m
+[36m@@ -1,11 +1,10 @@[m
+[31m-[m
+ //Use: var x = lastEight(answers)[m
+ //Before: answers is an array with the answer pattern, 0 for wrong 1 for right[m
+ //After: x is a 2 item array, the first item is the current score[m
+ //the second is what the score will be if you answer correctly[m
+ function lastEight(answers) [m
+ {[m
+[31m-  var nomans = answers.slice();    //make a copy so the original is not touched[m
+[32m+[m[32m    var nomans = answers.slice();    //make a copy so the original is not touched[m
+ 	if(nomans.length < 8)	//increase the size of the array if needed[m
+ 	{[m
+ 		while(nomans.length < 8) [m
+[36m@@ -43,7 +42,7 @@[m [mfunction bestEight(answers, d)[m
+ 		grade[2] = true;[m
+ 		return grade;[m
+ 	}[m
+[31m-	var nomans = answers.slice(); //take copy to not mess with original array[m
+[32m+[m	[32mvar nomans = answers.slice();[m
+ 	if(nomans.length < 8)	//increase the size of the array if needed[m
+ 	{[m
+ 		while(nomans.length < 8) [m
+[36m@@ -66,67 +65,6 @@[m [mfunction bestEight(answers, d)[m
+ 	grade[1] = returner;[m
+ 	return grade;[m
+ }	[m
+[31m-[m
+[31m-//NB: þetta fall verður líklega ekki notað[m
+[31m-function eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+[31m-{[m
+[31m-    var nomans = answers;[m
+[31m-    var grade = new Array();[m
+[31m-    var returner = 0;[m
+[31m-	if(nomans.length < 7)	//ToDo can this be recursive/call to last i.e. return lastEight(nomans);[m
+[31m-	{[m
+[31m-		while(nomans.length < 8) [m
+[31m-            nomans.push(0); [m
+[31m-		var current = 0;		//current number of correct answers[m
+[31m-		for(i = 0; i < 8 ; i++)[m
+[31m-		current += nomans[i];[m
+[31m-		returner = Math.round((current/8*10)*4)/4;	//convert to 0-10 format[m
+[31m-	[m
+[31m-		grade[0] = returner;[m
+[31m-		if(nomans[7] === 0) // determines if the score will change[m
+[31m-		{[m
+[31m-			current++;[m
+[31m-			returner = Math.round((current/8*10)*4)/4;[m
+[31m-		}[m
+[31m-		grade[1] = returner;[m
+[31m-		return grade;[m
+[31m-	}[m
+[31m-	else{	//using weights[m
+[31m-	var sum = 0;	//total sum to be tallied[m
+[31m-	var cumsum  = 0;	//sum of all weighted answers[m
+[31m-	for(i=0; i<7; i++)[m
+[31m-		sum += nomans[i];	//works like the other functions[m
+[31m-	var weight = 8;[m
+[31m-	while (weight < 23 && weight < nomans.length)	//determine how many answers after the seventh[m
+[31m-		weight ++;[m
+[31m-	i=7;[m
+[31m-	while(i<23 && i< nomans.length){[m
+[31m-		cumsum += nomans[i]*(((i - 7)/(weight-7))/(0.5*(weight-8))); //ToDo find out why this works[m
+[31m-        i++;[m
+[31m-	}[m
+[31m-	sum += cumsum;[m
+[31m-	returner = (Math.round((sum/8*10)*4)/4).toFixed(2);[m
+[31m-	grade[0] = returner;[m
+[31m-   nomans.splice(0,0,1); // ToDo can this be optimized?[m
+[31m-    var sum = 0;[m
+[31m-	var cumsum  = 0;[m
+[31m-	var divider = 0;[m
+[31m-	for(i=0; i<7; i++)[m
+[31m-		sum += nomans[i];[m
+[31m-	var weight = 8;[m
+[31m-	while (weight < 23 && weight < nomans.length)[m
+[31m-		weight ++;[m
+[31m-	i=7;[m
+[31m-	while(i<23 && i< nomans.length){[m
+[31m-		cumsum += nomans[i]*(((i - 7)/(weight-7))/(0.5*(weight-8))); //ToDo find out why this works[m
+[31m-        i++;[m
+[31m-	}[m
+[31m-	sum += cumsum;[m
+[31m-	returner = (Math.round((sum/8*10)*4)/4).toFixed(2);[m
+[31m-	grade[1] = returner;[m
+[31m-	return grade;[m
+[31m-	}[m
+[31m-}[m
+ 	[m
+ //Use: var vector = sevenWithweights(answers);[m
+ //Before: answers is an array with values either 1 or 0 depending or right or wrong answers in the past[m
+[36m@@ -137,17 +75,17 @@[m [mfunction eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+ {[m
+     var nomans = answers.slice(); //copy array not use the original[m
+     var grade = new Array();[m
+[31m-    var returner = 0;    //intermediary to be copied to grade[][m
+[32m+[m[32m    var returner = 0;	//intermediary to be copied to grade[][m
+ 	var sum = 0;	//total sum to be tallied[m
+     var debug = 0;[m
+ 	var cumsum  = 0;	//sum of all weighted answers[m
+[31m-    if(nomans.length < 7)[m
+[32m+[m	[32mif(nomans.length < 7)[m
+     {[m
+         while(nomans.length < 7)[m
+             nomans.push(0);[m
+     }        [m
+ 	for(i=0; i<7; i++){[m
+[31m-		nomans[i] = nomans[i]/10;  //solid weight of 0.1 for first 7[m
+[32m+[m		[32mnomans[i] = nomans[i]/10;[m
+         //print(nomans[i]);[m
+         sum += nomans[i];}	//works like the other functions[m
+ 	var weight = 7;[m
+[36m@@ -156,7 +94,7 @@[m [mfunction eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+     //print(weight);    [m
+ 	i=7;[m
+ 	while(i<weight && i< nomans.length){[m
+[31m-		nomans[i] = nomans[i]*((23-i)/(23-7)); //ToDo [m
+[32m+[m		[32mnomans[i] = nomans[i]*((23-i)/(23-7)); //ToDo find out why this works[m
+         //print(nomans[i]);[m
+         if (nomans[i] === 0)[m
+             cumsum += 1/2;[m
+[36m@@ -175,15 +113,10 @@[m [mfunction eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+     //print(cumsum); [m
+     //print(sum);[m
+ 	returner = (Math.round((sum*10)*4)/4).toFixed(2);[m
+[31m-	grade[0] = returner;[m
+[32m+[m	[32mgrade[0] = parseFloat(returner);[m
+     //print(answers);[m
+     nomans = answers.slice();[m
+    nomans.splice(0,0,1); // Next answer: ToDo can this be optimized?[m
+[31m-   if(nomans.length < 7)[m
+[31m-   {[m
+[31m-        while(nomans.length < 7)[m
+[31m-            nomans.push(0);[m
+[31m-    }   [m
+     returner = 0;[m
+     sum = 0;	//total sum to be tallied[m
+     debug = 0;[m
+[36m@@ -198,7 +131,7 @@[m [mfunction eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+     //print(weight);    [m
+ 	i=7;[m
+ 	while(i<weight && i< nomans.length){[m
+[31m-		nomans[i] = nomans[i]*((23-i)/(23-7)); //ToDo[m
+[32m+[m		[32mnomans[i] = nomans[i]*((23-i)/(23-7)); //ToDo find out why this works[m
+         //print(nomans[i]);[m
+         if (nomans[i] === 0)[m
+             cumsum += 1/2;[m
+[36m@@ -217,7 +150,7 @@[m [mfunction eightAndweights(answers) //ToDo - +1 answer i.e. grades[1] í else!![m
+     //print(cumsum); [m
+     //print(sum);[m
+ 	returner = (Math.round((sum*10)*4)/4).toFixed(2);[m
+[31m-	grade[1] = returner;[m
+[32m+[m	[32mgrade[1] = parseFloat(returner);[m
+ 	return grade;  [m
+ }[m
+ [m
+[36m@@ -239,22 +172,21 @@[m [mfunction averageWeights(answers)[m
+         }         [m
+         if(nomans.length <= 16){	// works just like lastEight();[m
+             for(i = 0; i<8; i++)[m
+[31m-                sum += nomans[i];[m
+[31m-            print(sum);    [m
+[32m+[m[32m                sum += nomans[i];[m[41m    [m
+             sum = (Math.round((sum/8*10)*4)/4).toFixed(2);[m
+[31m-            grade[0] = sum;[m
+[32m+[m[32m            grade[0] = parseFloat(sum);[m
+         }[m
+         else if(nomans.length <= 60){	// takes more answers into your grade the more you try[m
+             for (i=0; i<n; i++)[m
+                 sum += nomans[i];[m
+             sum = (Math.round((sum/n*10)*4)/4).toFixed(2);  [m
+[31m-            grade[0] = sum;[m
+[32m+[m[32m            grade[0] = parseFloat(sum);[m
+         } [m
+         else{[m
+             for(i=0; i<30; i++)		// peaks at 60+ answers taking the first 30 answers into the grade[m
+                 sum += nomans[i];[m
+             sum = (Math.round((sum/30*10)*4)/4).toFixed(2);[m
+[31m-            grade[0] = sum;[m
+[32m+[m[32m            grade[0] = parseFloat(sum);[m
+         }[m
+         nomans.splice(0,0,1);		//ToDo: just like the others, this might be better, however not in its current state[m
+         sum = 0;[m
+[36m@@ -268,19 +200,19 @@[m [mfunction averageWeights(answers)[m
+             for(i = 0; i<8; i++)[m
+                 sum += nomans[i];    [m
+             sum = (Math.round((sum/8*10)*4)/4).toFixed(2);[m
+[31m-            grade[1] = sum;[m
+[32m+[m[32m            grade[1] = parseFloat(sum);[m
+         }[m
+         else if(nomans.length <= 60){[m
+             for (i=0; i<n; i++)[m
+                 sum += nomans[i];[m
+             sum = (Math.round((sum/n*10)*4)/4).toFixed(2);  [m
+[31m-            grade[1] = sum;[m
+[32m+[m[32m            grade[1] = parseFloat(sum);[m
+         } [m
+         else{[m
+             for(i=0; i<30; i++)[m
+                 sum += nomans[i];[m
+             sum = (Math.round((sum/30*10)*4)/4).toFixed(2);[m
+[31m-            grade[1] = sum;[m
+[32m+[m[32m            grade[1] = parseFloat(sum);[m
+         }[m
+     return grade;[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
