@@ -29,6 +29,7 @@ setup(
     install_requires=[
         'setuptools',
         'plone.subrequest',
+        'Products.TutorWeb',
         'lxml',
     ],
     extras_require={

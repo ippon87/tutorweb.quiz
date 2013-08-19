@@ -7,14 +7,9 @@
   xmlns:plone="http://namespaces.plone.org/plone"
   i18n_domain="tutorweb">
 
-    <includeDependencies package="." />
-
-    <include package=".browser" file="configure.zcml" />
-
-    <!-- Static resources -->
-    <browser:resourceDirectory
-        name="tutorweb.quiz"
-        directory="resources"
-        />
+    <utility
+        provides="collective.lead.interfaces.IDatabase"
+        factory=".database.TestDatabase"
+        name="tutorweb.quizquestioninformation"/>  
 
 </configure>
