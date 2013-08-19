@@ -12,6 +12,17 @@ h1 {
     padding: 60px;
     margin-bottom: 30px;
     border-radius: 6px;
+<<<<<<< HEAD
+=======
+}
+#tw-quiz.mathjax-busy > * {
+    opacity: 0;
+}
+#tw-quiz.mathjax-busy:before {
+    content: "Please wait...";
+    display: block;
+    text-align: center;
+>>>>>>> origin/master
 }
 #tw-quiz.mathjax-busy > * {
     opacity: 0;
@@ -24,6 +35,14 @@ h1 {
 
 /* === Quiz questions ====================================================== */
 
+<<<<<<< HEAD
+=======
+/* === Quiz questions ====================================================== */
+
+#tw-quiz h3 {
+    margin: 0;
+}
+>>>>>>> origin/master
 #tw-quiz ol {
     position: relative;
 }
